@@ -292,7 +292,7 @@ class AdminController extends BaseAdminController
         $vars = explode('\\',$this->master_entity['class']);
         $master_entity_class =  ucfirst(strtolower(end($vars)));
 
-        $this->entity = $this->get('easyadmin.config.manager')->getEntityConfiguration($entity);
+        $this->entity = $this->get('easyadmin.config.manager')->getEntityConfig($entity);
 
         $fields = $this->entity['list']['fields'];
         foreach($metadata['ignore_fields']??[] as $field_to_del) {
@@ -673,7 +673,7 @@ class AdminController extends BaseAdminController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function batchAction()
+    public function batchAction(): RedirectResponse
     {
         $name = $this->request->request->get('name') ?? $this->request->query->get('name');
         $ids = $this->request->request->get('ids') ?? $this->request->query->get('ids');

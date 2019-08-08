@@ -1,6 +1,7 @@
 <?php
 namespace Lle\EasyAdminPlusBundle\EventSubscriber;
 
+use EasyCorp\Bundle\EasyAdminBundle\Configuration\ConfigManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Lle\EasyAdminPlusBundle\Filter\FilterState;
@@ -17,7 +18,7 @@ class FilterSubscriber implements EventSubscriberInterface
     
     private $filterState;
     
-    public function __construct(Session $session, FilterState $filterState, $easyadmin_config_manager)
+    public function __construct(Session $session, FilterState $filterState, ConfigManager $easyadmin_config_manager)
     {
         $this->session = $session;
         $this->easyadmin_config_manager = $easyadmin_config_manager;
@@ -36,7 +37,7 @@ class FilterSubscriber implements EventSubscriberInterface
             return;
         }
         
-        $entity = $this->easyadmin_config_manager->getEntityConfiguration($entityName);
+        $entity = $this->easyadmin_config_manager->getEntityConfig($entityName);
         if (isset($entity['filter'])) {
             $this->filterState->bindRequest($request, $entity);
         }
