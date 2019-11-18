@@ -410,6 +410,11 @@ class AdminController extends BaseAdminController
     {
         $this->em = $this->getDoctrine()->getManager();
 
+        // disable all filters
+        foreach($this->em->getFilters()->getEnabledFilters() as $filter => $obj) {
+            $this->em->getFilters()->disable($filter);
+        }
+
         $repo = $this->em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
         $logs = $repo->getLogEntries($item);
 
