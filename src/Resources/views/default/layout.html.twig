@@ -59,6 +59,28 @@
 </div>
 {% endblock wrapper %}
 
+{% block content %}
+    {% if _request_parameters is defined %}
+        <section class="content-header">
+            {% block content_header %}
+                <h1 class="title">{% block content_title %}{% endblock %}</h1>
+            {% endblock content_header %}
+            {% block content_help %}
+                {% if _entity_config is defined and _entity_config[app.request.query.get('action')]['help']|default(false) %}
+                    <div class="box box-widget help-entity">
+                        <div class="box-body">
+                            {{ _entity_config[app.request.query.get('action')]['help']|trans(domain = _entity_config.translation_domain)|raw }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endblock content_help %}
+        </section>
+    {% endif %}
+    <section id="main" class="content">
+        {% block main %}{% endblock %}
+    </section>
+{% endblock %}
+
 {% block body_javascript %}
 {{ parent() }}
 <script>
