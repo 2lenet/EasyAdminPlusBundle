@@ -1,5 +1,9 @@
 # EasyAdminPlusBundle
 
+### Deprecated
+
+Deprecated: Please have a look at https://github.com/2lenet/CruditBundle which replace EasyAdmin and  this bundle all in one.
+
 ### About
 
 EasyAdminPlusBundle is a Symfony 4 wrapper for the amazing [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle) which includes some extra features. 
