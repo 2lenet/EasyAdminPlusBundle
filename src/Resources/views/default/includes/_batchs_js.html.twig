@@ -155,6 +155,7 @@
             var $modalDiv = $(e.delegateTarget);
             var href = $(this).data('href');
             var formname = $(this).data('formname');
+            $(this).attr('disabled', 'disabled');
             doBulkAction(href, formname);
             $modalDiv.addClass('loading');
             setTimeout(function() {
