@@ -2,6 +2,7 @@
 
 namespace Lle\EasyAdminPlusBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
