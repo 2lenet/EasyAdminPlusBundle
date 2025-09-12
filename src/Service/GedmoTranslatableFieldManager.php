@@ -48,10 +48,8 @@ class GedmoTranslatableFieldManager
     /* @var $translation AbstractPersonalTranslation */
     private function getTranslations($entity, $fieldName)
     {
-
         // 'personal' translations (separate table for each entity)
-        if(\method_exists($entity, self::GEDMO_PERSONAL_TRANSLATIONS_GET) && \is_callable(array($entity, self::GEDMO_PERSONAL_TRANSLATIONS_GET)))
-        {
+        if (\method_exists($entity, self::GEDMO_PERSONAL_TRANSLATIONS_GET) && \is_callable(array($entity, self::GEDMO_PERSONAL_TRANSLATIONS_GET))) {
             $translations = array();
             foreach($entity->getTranslations() as $translation)
             {
@@ -61,13 +59,14 @@ class GedmoTranslatableFieldManager
             }
 
             return $translations;
-        }
-        // 'basic' translations (ext_translations table)
-        else
-        {
-            return \array_map(function($element) {return \array_shift($element);}, $this->getTranslationRepository($entity)->findTranslations($entity));
+        } else {
+            // 'basic' translations (ext_translations table)
+            return \array_map(function ($element) use ($fieldName) {
+                return array_key_exists($fieldName, $element) ? $element[$fieldName] : null;
+            }, $this->getTranslationRepository($entity)->findTranslations($entity));
         }
     }
+
     private function getEntityInDefaultLocale($entity, $defaultLocale)
     {
         $class = \get_class($entity);
